@@ -36,6 +36,10 @@ class InsertHelpersCommand extends Command
 
         try {
             app(VerifyDependencies::class)(['lando']);
+
+            // TODO: Separate project type and lando discovery.
+            // Want to be able to prompt user if they want to create a lando file.
+
             app(InsertHelpers::class)();
         } catch (Exception $e) {
             $this->error("\nFAILURE: " . $e->getMessage());

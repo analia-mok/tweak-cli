@@ -91,7 +91,7 @@ class InsertHelpers
         $this->info('SUCCESS! Your project has been tweaked!');
     }
 
-    public function getProjectType(): string
+    protected function getProjectType(): string
     {
         $composerFilePath = $this->getPath([$this->basePath, 'composer.json']);
 
@@ -137,5 +137,15 @@ class InsertHelpers
         }
 
         return ProjectTypeEnum::UNKNOWN;
+    }
+
+    protected function editLando()
+    {
+        // TODO:
+    }
+
+    protected function addScripts()
+    {
+        // TODO:
     }
 }
