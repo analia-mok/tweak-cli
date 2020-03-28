@@ -1,0 +1,13 @@
+#!/bin/bash
+
+echo "Cleaning up lingering backups..."
+
+rm -f /tmp/files.tar.gz
+terminus backup:create $TERMINUS_SITE.dev --element=files
+terminus backup:get $TERMINUS_SITE.dev --element=files --to=/tmp/files.tar.gz
+tar -xzvf /tmp/files.tar.gz -C /app/web/sites/default/files --strip-components 1
+
+echo "Removing backup..."
+rm -f /tmp/files.tar.gz
+
+exit 0
