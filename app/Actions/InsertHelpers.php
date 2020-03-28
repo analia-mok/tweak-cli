@@ -2,6 +2,7 @@
 
 namespace App\Actions;
 
+use App\ConstructsPaths;
 use App\LogsToConsole;
 use App\ProjectTypeEnum;
 use Exception;
@@ -9,7 +10,7 @@ use Illuminate\Support\Facades\File;
 
 class InsertHelpers
 {
-    use LogsToConsole;
+    use LogsToConsole, ConstructsPaths;
 
     /**
      * All composer package names for drupal projects.
@@ -81,7 +82,7 @@ class InsertHelpers
         $this->line("Project type discovered: {$projectType}");
 
         // Check lando file.
-        $landoFilePath = $this->basePath . DIRECTORY_SEPARATOR . '.lando.yml';
+        $landoFilePath = $this->getPath([$this->basePath, '.lando.yml']);
         if (!File::isFile($landoFilePath)) {
             // TODO: Somehow prompt user if they want to create a new lando file.
             throw new Exception('Lando file does not exist');
@@ -92,10 +93,11 @@ class InsertHelpers
 
     public function getProjectType(): string
     {
-        $composerFilePath = $this->basePath . DIRECTORY_SEPARATOR . 'composer.json';
+        $composerFilePath = $this->getPath([$this->basePath, 'composer.json']);
+
         if (File::isFile($composerFilePath)) {
             // Run through drupal and/or wp possibilities.
-            $composerRawContents = File::get($this->basePath . DIRECTORY_SEPARATOR . 'composer.json');
+            $composerRawContents = File::get($composerFilePath);
 
             if (empty($composerRawContents)) {
                 throw new Exception('composer.json file has nothing in it...');
@@ -122,14 +124,14 @@ class InsertHelpers
 
         // Is Drupal?
         foreach (self::DRUPAL_DIRS as $dir) {
-            if (File::isDirectory($this->basePath . DIRECTORY_SEPARATOR . $dir)) {
+            if (File::isDirectory($this->getPath([$this->basePath, $dir]))) {
                 return ProjectTypeEnum::DRUPAL;
             }
         }
 
         // Is WordPress?
         foreach (self::WORDPRESS_DIRS as $dir) {
-            if (File::isDirectory($this->basePath . DIRECTORY_SEPARATOR . $dir)) {
+            if (File::isDirectory($this->getPath([$this->basePath, $dir]))) {
                 return ProjectTypeEnum::WORDPRESS;
             }
         }
