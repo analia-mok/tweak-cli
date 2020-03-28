@@ -80,16 +80,22 @@ class InsertHelpers
 
         $this->line("Project type discovered: {$projectType}");
 
-        // TODO: Get lando file if it exists.
-        // TODO: If lando DNE, error and tell user.
+        // Check lando file.
+        $landoFilePath = $this->basePath . DIRECTORY_SEPARATOR . '.lando.yml';
+        if (!File::isFile($landoFilePath)) {
+            // TODO: Somehow prompt user if they want to create a new lando file.
+            throw new Exception('Lando file does not exist');
+        }
+
+        $this->info('SUCCESS! Your project has been tweaked!');
     }
 
     public function getProjectType(): string
     {
-        if (File::isFile($this->basePath . DIRECTORY_SEPARATOR . 'composer.json')) {
+        $composerFilePath = $this->basePath . DIRECTORY_SEPARATOR . 'composer.json';
+        if (File::isFile($composerFilePath)) {
             // Run through drupal and/or wp possibilities.
-
-            $composerRawContents = file_get_contents($this->basePath . DIRECTORY_SEPARATOR . '/composer.json');
+            $composerRawContents = File::get($this->basePath . DIRECTORY_SEPARATOR . 'composer.json');
 
             if (empty($composerRawContents)) {
                 throw new Exception('composer.json file has nothing in it...');
