@@ -71,14 +71,20 @@ class InsertHelpers
     {
         $this->info('Tweaking in helpers...');
 
-        // TODO: Determine project type (if possible).
-        $this->line($this->getProjectType());
+        // Determine project type (if possible).
+        $projectType = $this->getProjectType();
+
+        if ($projectType === ProjectTypeEnum::UNKNOWN) {
+            throw new Exception('Could not determine what kind of project you are tweaking');
+        }
+
+        $this->line("Project type discovered: {$projectType}");
 
         // TODO: Get lando file if it exists.
         // TODO: If lando DNE, error and tell user.
     }
 
-    public function getProjectType(): ProjectTypeEnum
+    public function getProjectType(): string
     {
         if (File::isFile($this->basePath . DIRECTORY_SEPARATOR . 'composer.json')) {
             // Run through drupal and/or wp possibilities.
@@ -95,12 +101,12 @@ class InsertHelpers
                 foreach ($composerContents['require'] as $requirement) {
                     // Is Drupal?
                     if (in_array($requirement, self::DRUPAL_PACKAGE_NAMES)) {
-                        return ProjectTypeEnum::drupal();
+                        return ProjectTypeEnum::DRUPAL;
                     }
 
                     // Is WordPress?
                     if (in_array($requirement, self::WORDPRESS_PACKAGE_NAMES)) {
-                        return ProjectTypeEnum::wordpress();
+                        return ProjectTypeEnum::WORDPRESS;
                     }
                 }
             }
@@ -111,17 +117,17 @@ class InsertHelpers
         // Is Drupal?
         foreach (self::DRUPAL_DIRS as $dir) {
             if (File::isDirectory($this->basePath . DIRECTORY_SEPARATOR . $dir)) {
-                return ProjectTypeEnum::drupal();
+                return ProjectTypeEnum::DRUPAL;
             }
         }
 
         // Is WordPress?
         foreach (self::WORDPRESS_DIRS as $dir) {
             if (File::isDirectory($this->basePath . DIRECTORY_SEPARATOR . $dir)) {
-                return ProjectTypeEnum::wordpress();
+                return ProjectTypeEnum::WORDPRESS;
             }
         }
 
-        return ProjectTypeEnum::unknown();
+        return ProjectTypeEnum::UNKNOWN;
     }
 }

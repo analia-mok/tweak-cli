@@ -2,13 +2,12 @@
 
 namespace App;
 
-use Spatie\Enum\Enum;
-
 /**
- * @method static self drupal()
- * @method static self wordpress()
- * @method static self unknown()
+ * Enum for declaring project types.
  */
-class ProjectTypeEnum extends Enum
+abstract class ProjectTypeEnum
 {
+    const DRUPAL = 'Drupal';
+    const WORDPRESS = 'WordPress';
+    const UNKNOWN = 'Unknown';
 }
