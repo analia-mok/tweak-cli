@@ -5,6 +5,7 @@ namespace App\Actions;
 use App\ConstructsPaths;
 use App\LogsToConsole;
 use Illuminate\Support\Facades\File;
+use Symfony\Component\Yaml\Yaml;
 
 class RetrieveLandoFile
 {
@@ -22,6 +23,6 @@ class RetrieveLandoFile
             return '';
         }
 
-        return $landoFilePath;
+        return Yaml::parseFile($landoFilePath);
     }
 }

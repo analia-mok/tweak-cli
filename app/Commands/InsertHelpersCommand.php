@@ -2,8 +2,10 @@
 
 namespace App\Commands;
 
+use App\Actions\DetermineProjectType;
 use App\Actions\InsertHelpers;
 use App\Actions\RetrieveLandoFile;
+use App\Actions\VerifyDependencies;
 use Exception;
 use LaravelZero\Framework\Commands\Command;
 
@@ -35,11 +37,9 @@ class InsertHelpersCommand extends Command
         });
 
         try {
-            // app(VerifyDependencies::class)(['lando']);
+            app(VerifyDependencies::class)(['lando']);
 
-            // TODO: Separate project type and lando discovery.
-            // Want to be able to prompt user if they want to create a lando file.
-            // $projectType = app(DetermineProjectType::class)();
+            $projectType = app(DetermineProjectType::class)();
             $landoFile = app(RetrieveLandoFile::class)();
 
             if (empty($landoFile)) {
@@ -57,8 +57,9 @@ class InsertHelpersCommand extends Command
             }
 
             $this->info('Lando File Discovered');
+            $this->info(var_dump($landoFile));
 
-            app(InsertHelpers::class)();
+            app(InsertHelpers::class)($projectType, $landoFile);
         } catch (Exception $e) {
             $this->error($e->getMessage());
         }
