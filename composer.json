@@ -20,7 +20,8 @@
         "laminas/laminas-text": "^2.7",
         "laravel-zero/framework": "^7.0",
         "spatie/laravel-enum": "^1.4",
-        "symfony/yaml": "^5.0"
+        "symfony/yaml": "^5.0",
+        "titasgailius/terminal": "^0.2.2"
     },
     "require-dev": {
         "mockery/mockery": "^1.3.1",

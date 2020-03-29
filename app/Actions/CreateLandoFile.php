@@ -2,29 +2,16 @@
 
 namespace App\Actions;
 
-use App\Shell\Shell;
 use Exception;
+use TitasGailius\Terminal\Terminal;
 
 class CreateLandoFile
 {
-    /**
-     * Instance of a command shell.
-     *
-     * @var App\Shell\Shell
-     */
-    protected $shell;
-
-    public function __construct(Shell $shell)
-    {
-        $this->shell = $shell;
-    }
-
     public function __invoke()
     {
-        /** @var \Symfony\Component\Process\Process $process */
-        $process = $this->shell->execute('lando init');
+        $response = Terminal::run('lando init .');
 
-        if (!$process->isSuccessful()) {
+        if (!$response->ok()) {
             throw new Exception('FAILURE: Could not create lando file');
         }
 
