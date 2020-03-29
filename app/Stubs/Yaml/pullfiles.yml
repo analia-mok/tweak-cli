@@ -1,5 +1,5 @@
 service: appserver
-  description: Pulls dev environment files
-  cmd:
-    - chmod u+x /app/scripts/lando-helpers/get-pantheon-files-backup.sh
-    - /bin/bash /app/scripts/lando-helpers/get-pantheon-files-backup.sh
+description: Pulls dev environment files
+cmd:
+  - chmod u+x /app/scripts/lando-helpers/get-pantheon-files-backup.sh
+  - /bin/bash /app/scripts/lando-helpers/get-pantheon-files-backup.sh

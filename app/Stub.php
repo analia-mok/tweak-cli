@@ -14,16 +14,14 @@ class Stub
      *
      * @param string $filename - name of file without extension.
      * @throws Exception
-     * @return string
+     * @return array
      */
-    public static function getYaml(string $filename): string
+    public static function getYaml(string $filename): array
     {
         try {
-            $file = File::get(base_path("app/Stubs/Yaml/{$filename}.yml"));
-
-            return Yaml::parseFile($file);
+            return Yaml::parseFile(base_path("app/Stubs/Yaml/{$filename}.yml"));
         } catch (ParseException $e) {
-            throw new Exception('Invalid yaml');
+            throw new Exception($e->getMessage());
         } catch (Exception $e) {
             throw new Exception($e->getMessage());
         }

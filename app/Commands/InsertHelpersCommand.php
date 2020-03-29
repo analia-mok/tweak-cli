@@ -56,10 +56,7 @@ class InsertHelpersCommand extends Command
                 throw new Exception('Lando file must exist before continuing. Run lando init first.');
             }
 
-            $this->info('Lando File Discovered');
-
-            // TODO: Remove me.
-            $this->info(var_dump($landoFile));
+            $this->line("Lando File Discovered\n");
 
             // Insert Base Helpers.
             app(InsertBaseHelpers::class)($projectType, $landoFile);

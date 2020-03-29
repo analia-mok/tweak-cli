@@ -2,7 +2,7 @@
 
 namespace App\Actions;
 
-use App\ConstructsPaths;
+use App\InteractsWithLando;
 use App\LogsToConsole;
 use App\ProjectTypeEnum;
 use App\Stub;
@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\File;
 
 class InsertBaseHelpers
 {
-    use LogsToConsole, ConstructsPaths;
+    use LogsToConsole, InteractsWithLando;
 
     /**
      * Path to lando file.
@@ -29,12 +29,26 @@ class InsertBaseHelpers
      *
      * @param string $projectType - Type of project
      * @param array $landoFile - Contents of current lando file
-     * @return void
+     * @return array Send back adjusted lando file.
      */
-    public function __invoke(string $projectType, array $landoFile)
+    public function __invoke(string $projectType, array &$landoFile)
     {
         $this->info("Tweaking in base helpers...\n");
 
+        $this->createScripts($projectType);
+
+        // Add Lando configuration.
+        $this->adjustLandoFile($projectType, $landoFile);
+    }
+
+    /**
+     * Generates scripts directory and script files
+     *
+     * @param string $projectType
+     * @return void
+     */
+    public function createScripts(string $projectType)
+    {
         // Create script files.
         $installMessage = '';
         $uploadsPath = '';
@@ -84,9 +98,33 @@ class InsertBaseHelpers
         File::put($this->getPath([$scriptDirPath, 'get-pantheon-db-backup.sh']), $getPantheonDbBackupStub);
         File::put($this->getPath([$scriptDirPath, 'get-pantheon-files-backup.sh']), $getPantheonFileBackupStub);
 
-        // Add Lando configuration.
-        $firstTimeSetupConfig = '';
-        $pulldbConfig = '';
-        $pullfilesConfig = '';
+        $this->info('Success! Created scripts');
+    }
+
+    /**
+     * Adds scripts to lando's tooling section.
+     *
+     * @param string $projectType
+     * @param array $landoFile
+     * @return void
+     */
+    public function adjustLandoFile(string $projectType, array &$landoFile)
+    {
+        if ($projectType === ProjectTypeEnum::DRUPAL || $projectType === ProjectTypeEnum::DRUPAL_COMPOSER) {
+            $firstTimeSetupConfig = Stub::getYaml('drupal-setup');
+        } else {
+            $firstTimeSetupConfig = Stub::getYaml('wordpress-setup');
+        }
+
+        $pulldbConfig = Stub::getYaml('pulldb');
+        $pullfilesConfig = Stub::getYaml('pullfiles');
+
+        $landoFile['tooling']['setup'] = $firstTimeSetupConfig;
+        $landoFile['tooling']['pulldb'] = $pulldbConfig;
+        $landoFile['tooling']['pullfiles'] = $pullfilesConfig;
+
+        $this->writeToLandoFile($landoFile);
+
+        $this->info('Success! .lando.yml adjusted');
     }
 }
