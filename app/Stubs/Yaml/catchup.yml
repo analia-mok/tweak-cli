@@ -1,0 +1,11 @@
+service: appserver
+description: Runs basic commands to bring your local project instance up-to-date.
+cmd:
+  - echo "Installing composer dependencies"
+  - composer install
+  - echo "Running database updates"
+  - drush updb -y
+  - echo "Running config imports"
+  - drush config-import -y
+  - drush cr
+  - echo "Please run yarn install && yarn build from your host machine"

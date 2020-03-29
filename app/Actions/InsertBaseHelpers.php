@@ -98,7 +98,7 @@ class InsertBaseHelpers
         File::put($this->getPath([$scriptDirPath, 'get-pantheon-db-backup.sh']), $getPantheonDbBackupStub);
         File::put($this->getPath([$scriptDirPath, 'get-pantheon-files-backup.sh']), $getPantheonFileBackupStub);
 
-        $this->info('Success! Created scripts');
+        $this->info('SUCCESS! Created helper scripts');
     }
 
     /**
@@ -122,9 +122,10 @@ class InsertBaseHelpers
         $landoFile['tooling']['setup'] = $firstTimeSetupConfig;
         $landoFile['tooling']['pulldb'] = $pulldbConfig;
         $landoFile['tooling']['pullfiles'] = $pullfilesConfig;
+        $landoFile['tooling']['push'] = 'disabled';
 
         $this->writeToLandoFile($landoFile);
 
-        $this->info('Success! .lando.yml adjusted');
+        $this->info('SUCCESS! .lando.yml now has base helpers tooling');
     }
 }

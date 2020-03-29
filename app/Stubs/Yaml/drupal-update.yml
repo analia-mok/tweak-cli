@@ -1,0 +1,5 @@
+description: Update Drupal core to the latest recommended release
+cmd:
+  - appserver: composer update drupal/core --with-dependencies
+  - appserver: drush updatedb
+  - appserver: drush cr

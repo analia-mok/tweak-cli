@@ -4,8 +4,10 @@ namespace App\Commands;
 
 use App\Actions\DetermineProjectType;
 use App\Actions\InsertBaseHelpers;
+use App\Actions\InsertDrupalHelpers;
 use App\Actions\RetrieveLandoFile;
 use App\Actions\VerifyDependencies;
+use App\ProjectTypeEnum;
 use Exception;
 use LaravelZero\Framework\Commands\Command;
 
@@ -61,7 +63,10 @@ class InsertHelpersCommand extends Command
             // Insert Base Helpers.
             app(InsertBaseHelpers::class)($projectType, $landoFile);
 
-            // TODO: Insert Drupal-helpers.
+            // Insert Drupal-helpers.
+            if ($projectType === ProjectTypeEnum::DRUPAL || $projectType === ProjectTypeEnum::DRUPAL_COMPOSER) {
+                app(InsertDrupalHelpers::class)($landoFile);
+            }
 
             // TODO: Insert WordPress Helpers.
 

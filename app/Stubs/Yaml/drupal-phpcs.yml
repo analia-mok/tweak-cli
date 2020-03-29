@@ -1,0 +1,2 @@
+service: appserver
+cmd: "/app/vendor/bin/phpcs --standard=Drupal,DrupalPractice"
