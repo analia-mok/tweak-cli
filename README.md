@@ -2,6 +2,10 @@
 
 An opinionated bootstrapper tool for setting up [Lando-based](https://docs.lando.dev/) projects.
 
+## Installation
+
+TODO
+
 ## How to Use
 
 Preferably, you will already have created your project on Pantheon and have run `lando init`.
@@ -18,6 +22,7 @@ your lando.yml file.
 
 ## Future Goals
 
+- [ ] Adjust pulldb and pullfiles scripts to allow selection of environments.
 - [ ] CI/CD file generation. We do have a standard set of CircleCI-related files that barely change from project to project that we could share.
   - WordPress + Pantheon's CircleCI Orb.
 - [ ] Opt-in to tweak in `pantheon.yml` configuration for quicksilver (e.g. Slack, New Relic Notifications)

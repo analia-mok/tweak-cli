@@ -1,0 +1,20 @@
+#!/bin/bash
+
+echo "{{ INSTALL_MSG }}"
+
+# Create uploads directory if it doesn't exist
+UPLOADS_DIR=/app/wp-content/uploads
+if [ ! -d "$UPLOADS_DIR"  ] ; then
+  echo "Creating uploads directory..."
+  mkdir "$UPLOADS_DIR"
+fi
+
+# Grabbing Files
+chmod u+x /app/scripts/lando-helpers/get-pantheon-files-backup.sh
+/bin/bash /app/scripts/lando-helpers/get-pantheon-files-backup.sh
+
+# Grabbing Dev Database
+chmod u+x /app/scripts/lando-helpers/get-pantheon-db-backup.sh
+/bin/bash /app/scripts/lando-helpers/get-pantheon-db-backup.sh
+
+exit 0

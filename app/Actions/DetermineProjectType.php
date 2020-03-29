@@ -95,15 +95,16 @@ class DetermineProjectType
             $composerContents = json_decode($composerRawContents, true);
 
             if (isset($composerContents['require'])) {
-                foreach ($composerContents['require'] as $requirement) {
+                $packages = array_keys($composerContents['require']);
+                foreach ($packages as $package) {
                     // Is Drupal?
-                    if (in_array($requirement, self::DRUPAL_PACKAGE_NAMES)) {
-                        return ProjectTypeEnum::DRUPAL;
+                    if (in_array($package, self::DRUPAL_PACKAGE_NAMES)) {
+                        return ProjectTypeEnum::DRUPAL_COMPOSER;
                     }
 
                     // Is WordPress?
-                    if (in_array($requirement, self::WORDPRESS_PACKAGE_NAMES)) {
-                        return ProjectTypeEnum::WORDPRESS;
+                    if (in_array($package, self::WORDPRESS_PACKAGE_NAMES)) {
+                        return ProjectTypeEnum::WORDPRESS_COMPOSER;
                     }
                 }
             }

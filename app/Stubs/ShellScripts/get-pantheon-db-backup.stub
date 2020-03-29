@@ -1,0 +1,12 @@
+#!/bin/bash
+
+## Create Database Backup from Pantheon Site's Dev Environment
+
+echo "Cleaning up lingering backups..."
+echo ""
+
+rm -f ./database.sql.gz
+terminus backup:create $TERMINUS_SITE.dev --element=db
+terminus backup:get $TERMINUS_SITE.dev --element=db --to=./database.sql.gz
+
+exit 0

@@ -1,0 +1,8 @@
+description: Pulls dev environment database
+  cmd:
+    - appserver: chmod u+x /app/scripts/lando-helpers/get-pantheon-db-backup.sh
+    - appserver: /bin/bash /app/scripts/lando-helpers/get-pantheon-db-backup.sh
+    - appserver: echo "Importing database..."
+    - database: /helpers/sql-import.sh database.sql.gz --no-wipe=false
+    - appserver: echo "Removing backup..."
+    - appserver: rm -f ./database.sql.gz

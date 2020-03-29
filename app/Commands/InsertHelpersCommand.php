@@ -3,7 +3,7 @@
 namespace App\Commands;
 
 use App\Actions\DetermineProjectType;
-use App\Actions\InsertHelpers;
+use App\Actions\InsertBaseHelpers;
 use App\Actions\RetrieveLandoFile;
 use App\Actions\VerifyDependencies;
 use Exception;
@@ -57,9 +57,19 @@ class InsertHelpersCommand extends Command
             }
 
             $this->info('Lando File Discovered');
+
+            // TODO: Remove me.
             $this->info(var_dump($landoFile));
 
-            app(InsertHelpers::class)($projectType, $landoFile);
+            // Insert Base Helpers.
+            app(InsertBaseHelpers::class)($projectType, $landoFile);
+
+            // TODO: Insert Drupal-helpers.
+
+            // TODO: Insert WordPress Helpers.
+
+            // Done!
+            $this->info("\nSUCCESS! Your project has been tweaked!");
         } catch (Exception $e) {
             $this->error($e->getMessage());
         }
