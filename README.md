@@ -1,37 +1,26 @@
-<p align="center">
-    <img title="Laravel Zero" height="100" src="https://raw.githubusercontent.com/laravel-zero/docs/master/images/logo/laravel-zero-readme.png" />
-</p>
+# Tweak CLI
 
-<p align="center">
-  <a href="https://github.com/laravel-zero/framework/actions"><img src="https://img.shields.io/github/workflow/status/laravel-zero/framework/Continuous%20Integration.svg" alt="Build Status"></img></a>
-  <a href="https://scrutinizer-ci.com/g/laravel-zero/framework"><img src="https://img.shields.io/scrutinizer/g/laravel-zero/framework.svg" alt="Quality Score"></img></a>
-  <a href="https://packagist.org/packages/laravel-zero/framework"><img src="https://poser.pugx.org/laravel-zero/framework/d/total.svg" alt="Total Downloads"></a>
-  <a href="https://packagist.org/packages/laravel-zero/framework"><img src="https://poser.pugx.org/laravel-zero/framework/v/stable.svg" alt="Latest Stable Version"></a>
-  <a href="https://packagist.org/packages/laravel-zero/framework"><img src="https://poser.pugx.org/laravel-zero/framework/license.svg" alt="License"></a>
-</p>
+An opinionated bootstrapper tool for setting up [Lando-based](https://docs.lando.dev/) projects.
 
-<h4> <center>This is a <bold>community project</bold> and not an official Laravel one </center></h4>
+## How to Use
 
-Laravel Zero was created by, and is maintained by [Nuno Maduro](https://github.com/nunomaduro), and is a micro-framework that provides an elegant starting point for your console application. It is an **unofficial** and customized version of Laravel optimized for building command-line applications.
+Preferably, you will already have created your project on Pantheon and have run `lando init`.
 
-- Built on top of the [Laravel](https://laravel.com) components.
-- Optional installation of Laravel [Eloquent](https://laravel-zero.com/docs/database/), Laravel [Logging](https://laravel-zero.com/docs/logging/) and many others.
-- Supports interactive [menus](https://laravel-zero.com/docs/build-interactive-menus/) and [desktop notifications](https://laravel-zero.com/docs/send-desktop-notifications/) on Linux, Windows & MacOS.
-- Ships with a [Scheduler](https://laravel-zero.com/docs/task-scheduling/) and  a [Standalone Compiler](https://laravel-zero.com/docs/build-a-standalone-application/).
-- Integration with [Collision](https://github.com/nunomaduro/collision) - Beautiful error reporting
+Once done, simply run `tweak in` and you will be set up with all of Tweak's helpers.
 
-------
+## Goals / Priorities
 
-## Documentation
+- [ ] Implement `tweak in`: Primary command for "tweaking in" helper scripts and adjusting
+your lando.yml file.
+- [ ] Support Pantheon-hosted projects
+- [ ] Support composer and non-composer projects
+- [ ] Support WordPress and Drupal
 
-For full documentation, visit [laravel-zero.com](https://laravel-zero.com/).
+## Future Goals
 
-## Support the development
-**Do you like this project? Support it by donating**
-
-- PayPal: [Donate](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=66BYDWAT92N6L)
-- Patreon: [Donate](https://www.patreon.com/nunomaduro)
-
-## License
-
-Laravel Zero is an open-source software licensed under the [MIT license](https://github.com/laravel-zero/laravel-zero/blob/stable/LICENSE.md).
+- [ ] CI/CD file generation. We do have a standard set of CircleCI-related files that barely change from project to project that we could share.
+  - WordPress + Pantheon's CircleCI Orb.
+- [ ] Opt-in to tweak in `pantheon.yml` configuration for quicksilver (e.g. Slack, New Relic Notifications)
+- [ ] There's some caveats to using Symfony's Process component for running external commands. It would be convenient to run `lando init` if the current project to `tweak in` does not a lando.yml yet.
+- [ ] Support other hosting platforms that are lando friendly, such as [Platform.sh](https://platform.sh).
+- [ ] Add Laravel helpers support
