@@ -5,6 +5,27 @@ namespace App;
 trait ConstructsPaths
 {
     /**
+     * Path to current directory.
+     *
+     * @var string
+     */
+    protected $basePath;
+
+    /**
+     * Retrieve current path.
+     *
+     * @return string|false
+     */
+    public function setBasePath()
+    {
+        if (!isset($this->basePath)) {
+            $this->basePath = getcwd();
+        }
+
+        return $this->basePath;
+    }
+
+    /**
      * Constructs a path using path parts and the correct directory separator.
      *
      * @param array $parts
