@@ -5,3 +5,4 @@
 /.vagrant
 .phpunit.result.cache
 /builds
+!/builds/tweak
