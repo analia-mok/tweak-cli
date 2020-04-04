@@ -2,6 +2,14 @@
 
 An opinionated bootstrapper tool for setting up [Lando-based](https://docs.lando.dev/) projects.
 
+At [GeekHive](https://www.geekhive.com/), we've standardized on using Lando for local development on WordPress and Drupal projects. However,
+for every new project, I always have to tweak (__hint hint nudge nudge__) the Lando config to add a
+set of helper tooling to make the team's life easier. So here is Tweak CLI, a simple tool for adding
+our helper commands and scripts to new projects.
+
+Currently, the tool __tweaks in__ yaml configuration and bash scripts into your current project. When the
+[latest release of Lando](https://blog.lando.dev/2020/02/10/q1-2020-update/) is out, we will convert most - if not all - of the helpers into a proper [Lando plugin](https://docs.lando.dev/contrib/contrib-plugins.html#plugins).
+
 ## Installation
 
 TODO
@@ -24,7 +32,8 @@ your lando.yml file.
 
 - [ ] Adjust pulldb and pullfiles scripts to allow selection of environments.
 - [ ] CI/CD file generation. We do have a standard set of CircleCI-related files that barely change from project to project that we could share.
-  - WordPress + Pantheon's CircleCI Orb.
+  - Ex. WordPress + Pantheon's CircleCI Orb.
+- [ ] Add better test coverage...
 - [ ] Opt-in to tweak in `pantheon.yml` configuration for quicksilver (e.g. Slack, New Relic Notifications)
 - [ ] There's some caveats to using Symfony's Process component for running external commands. It would be convenient to run `lando init` if the current project to `tweak in` does not a lando.yml yet.
 - [ ] Support other hosting platforms that are lando friendly, such as [Platform.sh](https://platform.sh).
