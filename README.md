@@ -12,9 +12,15 @@ Currently, the tool __tweaks in__ yaml configuration and bash scripts into your 
 
 ## Installation
 
-TODO
+Run `composer global require AnaliaMok/tweak-cli`
+
+## Upgrading
+
+Run `composer global update AnaliaMok/tweak-cli`
 
 ## How to Use
+
+Make sure you have `~/.composer/vendor/bin` in your terminal's path.
 
 Preferably, you will already have created your project on Pantheon and have run `lando init`.
 
