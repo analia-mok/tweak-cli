@@ -12,11 +12,11 @@ Currently, the tool __tweaks in__ yaml configuration and bash scripts into your 
 
 ## Installation
 
-Run `composer global require AnaliaMok/tweak-cli`
+Run `composer global require analia-mok/tweak-cli`
 
 ## Upgrading
 
-Run `composer global update AnaliaMok/tweak-cli`
+Run `composer global update analia-mok/tweak-cli`
 
 ## How to Use
 

@@ -1,12 +1,12 @@
 {
-    "name": "AnaliaMok/tweak-cli",
+    "name": "analia-mok/tweak-cli",
     "description": "An opinionated bootstrapper tool for setting up Lando-based projects.",
     "keywords": ["tweak", "lando", "php", "cli"],
     "type": "project",
     "license": "MIT",
     "support": {
-        "issues": "https://github.com/AnaliaMok/tweak-cli/issues",
-        "source": "https://github.com/AnaliaMok/tweak-cli"
+        "issues": "https://github.com/analia-mok/tweak-cli/issues",
+        "source": "https://github.com/analia-mok/tweak-cli"
     },
     "authors": [
         {
