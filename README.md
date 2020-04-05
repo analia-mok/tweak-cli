@@ -28,11 +28,11 @@ Once done, simply run `tweak in` and you will be set up with all of Tweak's help
 
 ## Goals / Priorities
 
-- [ ] Implement `tweak in`: Primary command for "tweaking in" helper scripts and adjusting
+- [X] Implement `tweak in`: Primary command for "tweaking in" helper scripts and adjusting
 your lando.yml file.
-- [ ] Support Pantheon-hosted projects
-- [ ] Support composer and non-composer projects
-- [ ] Support WordPress and Drupal
+- [X] Support Pantheon-hosted projects
+- [X] Support composer and non-composer projects
+- [X] Support WordPress and Drupal
 
 ## Future Goals
 
